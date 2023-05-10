@@ -200,17 +200,4 @@ function createContainer(id, arr, width, height) {
   return container;
 }
 
-function parent(index) {
-  if (index === 0) {
-    return -1;
-  }
-  return Math.floor((index - 1) / 2);
-}
 
-function leftChild(index) {
-  return 2 * index + 1;
-}
-
-function rightChild(index) {
-  return 2 * index + 2;
-}

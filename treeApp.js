@@ -13,6 +13,18 @@ function treeAndArray(){
     }
 }
 
+function heapify() {
+    reset();
+    let inputText = document.getElementById("array-input");
+    if (inputText !== '') {
+        input = inputText.value.trim().split(/\s+|\,+/g).map((num) => parseInt(num));
+        makeHeap(input);
+        createBinaryTreeAndArr(input);
+        document.getElementById('instructions').innerHTML = "<p> Parent's value is always greater than or equal to the values of its children.</p>";
+        document.getElementById('visual-title').innerHTML = "Max-Heap Binary Tree And Array";
+    }
+}
+
 function createBinaryTreeAndArr(arr){
    arrayContainer = createContainer("array-visual", arr, arr.length*60, 100);
    let tree = new Tree();
