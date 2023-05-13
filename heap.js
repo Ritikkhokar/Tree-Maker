@@ -24,10 +24,11 @@ function parent(index) {
 function makeHeap(arr){
     for(let i=1; i<arr.length;++i){
         let k = i;
-        while(k!=0 && arr[parent(k)]<arr[k]){
+        while(k>0 && arr[parent(k)]<arr[k]){
             swap(arr,k,parent(k));
             k = parent(k);
         }
-        return arr;
+        
     }
+    return arr;
 }

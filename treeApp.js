@@ -29,6 +29,7 @@ function createBinaryTreeAndArr(arr){
    arrayContainer = createContainer("array-visual", arr, arr.length*60, 100);
    let tree = new Tree();
    tree.createBinaryTree(input)
+   createArray(arr, 2, 30, 50, 50);
 }
 
 function createBinarySearchTree(){
