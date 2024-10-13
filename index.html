@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="tree.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="../index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
     <div class="container">
-        <!-- Left side with the tree visualizer -->
         <div class="left-section">
             <div id="title"> Tree Visualizer</div>
             <label>Array:</label><br />
@@ -33,7 +34,6 @@
             <div id="array-visual"></div>
         </div>
 
-        <!-- Right side with the chatbot -->
         <div class="right-section">
             <div id="chatbot-section">
                 <h3>What's Up?</h3>
@@ -51,13 +51,49 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="treeNode.js"></script>
     <script src="treeApp.js"></script>
-    <script src="heap.js"></script>
     <script>
-        function sendMessage() {
-            let input = document.getElementById('user-input').value;
-            // Handle message sending to chatbot here
-            alert('User message: ' + input);
+        class HTTPCall {
+
+            async post(url, data) {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer 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`
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const resData = await response.json();
+                const content = resData.choices[0].message.content;
+
+                document.getElementById('chat-window').innerText = content;
+
+
+                return resData;
+            }
         }
+        function sendMessage() {
+            const http = new HTTPCall;
+
+            let input = document.getElementById('user-input').value;
+            let query = "Using the elements:" + document.getElementById('array-input').value
+                + "apply" + document.getElementById('visual-title').innerHTML
+                + "algorith and answer the follwing question accordingly" + input;
+            console.log(query);
+            const data = {
+                "model": "gpt-4o",
+                "messages": [{ "role": "user", "content": query }],
+                "temperature": 0.7
+            };
+
+            http.post('https://api.openai.com/v1/chat/completions', data)
+
+                .then(data => console.log(data))
+                .catch(err => console.log(err));
+        }
+    </script>
+
     </script>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
