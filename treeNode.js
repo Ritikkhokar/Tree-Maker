@@ -1,4 +1,5 @@
-
+var highlightFill = "orange"; // Color for highlighting nodes
+var highlightFillText = "white"; // Text color when highlighted
 var regFill = "green" 
 var regFillText = "black"
 var xSpacing = 200
