@@ -101,7 +101,7 @@
             };
 
             // POST request example
-            http.post('https://api.openai.com/v1/chat/completions', data)
+            http.post(env.OPENAI_API_KEY, data)
 
                 // Resolving promise for response data 
                 .then(data => console.log(data))
